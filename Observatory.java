@@ -1,8 +1,12 @@
 package earthquakemonitoring;
 
+
+import java.util.Hashtable;
+import java.util.Iterator;
+
 /**
  *
- * @author Richard
+ * @author Richard and Aileen 
  * @version v.1
  */
 public class Observatory {
@@ -10,6 +14,10 @@ public class Observatory {
     private String CountryName;
     private int year;
     private double areaCovered;
+    int count_a=0;
+    int count_b=0;
+    int count_c=0;
+    int total_count= count_a+count_b+count_c;
     
     /**
      * creating default constructor
@@ -107,5 +115,62 @@ public class Observatory {
                 +"Area covered by observatory: "+ getAreaCovered();
         return details;
     }
-    
+    public int count(){
+        if(Galamsey.getColor_value()==1){
+            count_a++;
+        }
+        else if(Galamsey.getColor_value()==2){
+            count_b++;
+
+        }
+        else if(Galamsey.getColor_value()==3){
+            count_c++;
+        }
+        return total_count;
+    }
+      /**
+     * This method returns the largest "galamsey" colour value.
+     * @return large
+     */
+    public int largest(){
+       int large= Math.max(Math.max(count_a,count_b),count_c);
+       if(large==count_a){
+           System.out.println("Green");
+       }
+       else if (large==count_b){
+           System.out.println("Yellow");
+       }
+       else{
+           System.out.println("Brown");
+       }
+       return large;
+    }
+
+
+    /**
+     * This method returns the average "galamsey" colour value.
+     * @return
+     */
+    public double average(){
+        int total=count_a+2*(count_b)+ 3*(count_c);
+        double average= total/total_count;
+        return average;
+    }
+
+    /**
+     * This method returns the list of all "galamsey" events with a colour value greater than
+     * a given number n.
+     * @param Galamsey_Operations
+     * @param n
+     */
+    public void Galamsey_List(Hashtable Galamsey_Operations, int n){
+        Iterator<Integer> A1 = Galamsey_Operations.keySet().iterator();
+        while (A1.hasNext()) {
+            int key = A1.next();
+            Galamsey gy = (Galamsey) Galamsey_Operations.get(key);
+            if(gy.getColor_value()>n){
+                System.out.println(gy.GalamseyDetails()+ displayDetails());
+            }
+        }
+    }
 }
