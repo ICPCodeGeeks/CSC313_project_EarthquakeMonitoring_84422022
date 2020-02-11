@@ -9,39 +9,37 @@ public class Galamsey {
 	private String vegetation_color;
 	private int Color_value;
 	private int year;
-	
-	
+	static Position position;
+	private static double latitude;
+	private static double longitude;
 
-	private static class Position {
-		private int latitude;
-		private int longitude;
-		
-		private Position(){
-			latitude = 0;
-			longitude=0; 
+	public static class Position {
+		public double latitude;
+		public double longitude;
+
+		public Position() {
+			latitude = 0.0;
+			longitude = 0.0;
 		}
 
-		private Position(int latitude2, int longitude2) {
-			this.latitude=latitude2;
-			this.longitude=longitude2;
-			
-		}
+		public Position(double latitude, double longitude) {
+			this.latitude = latitude;
+			this.longitude = longitude;
 
-		
-}	
+		}
+	}
 		
 public Galamsey() {
 	
 }
 
 
-public Galamsey(String vegetation_color, int Color_value, int year, int latitude,int longitude) {
+public Galamsey(String vegetation_color, int Color_value, double latitude, double longitude) {
 	this.vegetation_color = vegetation_color;
 	this.Color_value=Color_value;
 	this.year=year;
-	Position position = new Position (latitude, longitude);
-	position.latitude=latitude;
-	position.longitude=longitude;
+	this.latitude=latitude;
+	this.longitude= longitude;
 }
 
 
@@ -104,14 +102,48 @@ public void setYear(int year) {
  * @return the position
  */
 
-/**
- * @param position the position to set
- */
-public void setPosition(int latitude,int longitude) {
-	latitude = latitude;
-	longitude=longitude;
-}
+	/**
+	 * This sets the latitude of the site
+	 * @param latitude
+	 */
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
+	/**
+	 * This returns the latitude 
+	 * @return latitude
+	 */
+	public static double getLatitude() {
+		return latitude;
+	}
+
+
+	/**
+	 * This returns the longitude
+	 * @return longitude
+	 */
+	public static double getLongitude() {
+		return longitude;
+	}
+
+	/**
+	 * This sets the longitude of the site
+	 * @param longitude
+	 */
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	
+
+	/**
+	 *
+	 * @return
+	 */
+	public static String getPosition() {
+		return getLatitude() +
+				" " + getLongitude();
+	}
 /**
  * 
  * @return GalamseyDets
@@ -119,7 +151,7 @@ public void setPosition(int latitude,int longitude) {
 public String GalamseyDetails() {
 	String GalamseyDets = "The vegetation color is " + this.getVegetation_color() + "\n" +
 						 "The color value is " + this.getColor_value() + "\n" +
-						// "The position is " + this.getPosition() +" \n" +
+						"The position is " + this.getPosition() +" \n" +
 						 "The year in which it happened is" + this.getYear() + "\n";
 	return GalamseyDets;
 						
