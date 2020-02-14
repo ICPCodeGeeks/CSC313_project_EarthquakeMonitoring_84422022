@@ -38,11 +38,11 @@ public class Monitoring {
      * @param Galamsey_Operations
      * @param n
      */
-    public static void Galamsey_List(Hashtable Galamsey_Operations, int n){
-        Iterator<Integer> A1 = Galamsey_Operations.keySet().iterator();
+   public static void Galamsey_List(ArrayList<Object> Galamsey_Operations, int n){
+        ListIterator<Object> A1 = Galamsey_Operations.listIterator();
         while (A1.hasNext()) {
-            int key = A1.next();
-            Galamsey gy = (Galamsey) Galamsey_Operations.get(key);
+            Object key = A1.next();
+            Galamsey gy = (Galamsey) Galamsey_Operations.get((Integer) key);
             if(gy.getColor_value()>n){
                 System.out.println(gy.GalamseyDetails()+ Observatory.displayDetails());
             }
