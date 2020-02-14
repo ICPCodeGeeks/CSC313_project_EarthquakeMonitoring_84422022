@@ -1,14 +1,11 @@
 package galamseys;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Hashtable;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
 
 public class MonitoringIO {
-    private static Hashtable Operations;
+    public static String[][] Operations= new String[100][100];
 
     public static int GeneralMenu() {
         Scanner menu = new Scanner(System.in);
@@ -26,12 +23,12 @@ public class MonitoringIO {
             } else {
                 System.out.println("Wrong input....................");
                 System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                System.out.println("(\"WELCOME  TO THE GALAMSEY INFORMATION CENTER\" +\n" +
-                        "                \"\\nPlease select an option\" +\n" +
-                        "                \"\\n 1.Enter Observatory Data\" +\n" +
-                        "                \"\\n 2.Enter Galamsey Data\" +\n" +
-                        "                \"\\n 3.Monitoring Statistics\" +\n" +
-                        "                \"\\n 4. Exit");
+                System.out.println("WELCOME  TO THE GALAMSEY INFORMATION CENTER" +
+                        "\nPlease select an option" +
+                        "\n 1.Enter Observatory Data" +
+                        "\n 2.Enter Galamsey Data" +
+                        "\n 3.Monitoring Statistics" +
+                        "\n 4. Exit");
                 menus = menu.nextInt();
 
             }
@@ -41,13 +38,14 @@ public class MonitoringIO {
 
 
     public static void Enquiry(){
-        System.out.println(" You have chosen Observatory Data." +
-                "\n Do you have an existing Galamsey Data?");
-        Scanner enq= new Scanner(System.in);
-        int enquire= enq.nextInt();
-        if(enquire==1){
+//        for (int i = 0; i <Operations.length ; i++) {
+//            for (int j = 0; j <100 ; j++) {
+//                Operations[i]=new_data
+//
+//            }
+//
+//        }
 
-        }
     }
 
 
@@ -72,14 +70,22 @@ public class MonitoringIO {
         System.out.println("Year:");
         int year = nam.nextInt();
         new_data.setYear(year);
-        Observatory_Files();
-    }
+        Observatory_Files();ArrayList<Observatory> newData= new ArrayList<>();
+            newData.add(new_data);
+            ArrayList< ArrayList<Object>> Operations=new ArrayList();
+            for (int i=0;i<100;i++){
+                Operations.add(i++,new ArrayList<Object>(newData));
+            }
+
+            }
+
+
 
 
     /**
      *
      */
-    public static void Galamsey_Data(){
+    public static void Galamsey_Data() throws FileNotFoundException {
         Galamsey new_data = new Galamsey();
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("You are entering new 'galamsey' data. Please answer the following");
@@ -103,27 +109,40 @@ public class MonitoringIO {
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");System.out.println("Year:");
         int year = nam.nextInt();
         new_data.setYear(year);
-        new_data= new Galamsey(veg_color,color_value,pos_lat,pos_long);
         try {
             writingTextToFile();
+            Hashtable<Integer,Galamsey> new_observatory=new Hashtable<>();
+            new_observatory.put(color_value,new_data);
         } catch (IOException e) {
             e.printStackTrace();
         }
-       // Operations.put(color_value,new_data);
+        ArrayList<Galamsey> newdata= new ArrayList<>();
+        newdata.add(new_data);
+        ArrayList< ArrayList<Object>> Operations=new ArrayList();
+        for (int i=0;i<100;i++){
+            Operations.add(i++,new ArrayList<Object>(newdata));
+        }
+
 
     }
 
 
-    public static void Statistics() {
+    public static void Statistics() throws FileNotFoundException {
         Scanner menu = new Scanner(System.in);
         System.out.println(" Enter a colour value from 0-3: ");
         int number= menu.nextInt();
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("These are the current Monitoring Statistics"+
-                "\n Largest colour value:"+ Monitoring.largests()+
-                "\n Average colour value: "+ Monitoring.average());
+                "\n Largest colour value:");
+        Monitoring.largests();
+        System.out.println("\n Average colour value: "+ Monitoring.average());
         System.out.println( "\n Galamsey Events: ");
-                Monitoring.Galamsey_List((Hashtable) Operations, number);
+
+    }
+
+
+    public static void Galamsey_File() {
+
     }
 
     public static void Observatory_File() throws FileNotFoundException {
@@ -132,7 +151,7 @@ public class MonitoringIO {
 
         try {
             //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("observatory_data.txt", true));
+            printWriter = new PrintWriter(new FileOutputStream("observatory_data.csv", true));
         } catch (FileNotFoundException fnfe) {
             fnfe.getMessage();
         }
@@ -152,13 +171,13 @@ public class MonitoringIO {
 
         try {
             //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("observatory_data.txt", true));
+            printWriter = new PrintWriter(new FileOutputStream("observatory_data.csv", true));
         } catch (FileNotFoundException fnfe) {
             fnfe.getMessage();
         }
 
 //prints the headings to the text file
-        printWriter.print(Observatory.getObsName() + "    " + Observatory.getCountryName() + "    " + Observatory.getYear()+"    " +Observatory.getAreaCovered());
+        printWriter.print(Observatory.getObsName() + "          " + Observatory.getCountryName() + "          " + Observatory.getYear()+"         " +Observatory.getAreaCovered());
         printWriter.println();
 
         printWriter.close();
@@ -170,7 +189,7 @@ public class MonitoringIO {
 
         try {
             //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("galamsey_data.txt", true));
+            printWriter = new PrintWriter(new FileOutputStream("galamsey_data.csv", true));
         } catch (FileNotFoundException fnfe) {
             fnfe.getMessage();
         }
@@ -188,12 +207,13 @@ public class MonitoringIO {
 
         try {
             //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("galamsey_data.txt", true));
+            printWriter = new PrintWriter(new FileOutputStream("galamsey_data.csv", true));
         } catch (FileNotFoundException fnfe) {
             fnfe.getMessage();
         }
 
 //prints the headings to the text file
+
         printWriter.print(Galamsey.getVegetation_color() + "    " + Galamsey.getColor_value() + "    " + Galamsey.getPosition()+"    "+Galamsey.getYear());
         printWriter.println();
 
@@ -233,6 +253,7 @@ public class MonitoringIO {
 
     public static void main(String[] args) throws FileNotFoundException {
         Hashtable<Integer, Galamsey> Operations= new Hashtable<>();
+        Hashtable[] Galamsey_Operations= new Hashtable[100];
 
         int cont= Continue();
         int gen=GeneralMenu();
@@ -254,7 +275,6 @@ public class MonitoringIO {
 
 
         }
-
 
     }
 }
