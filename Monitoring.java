@@ -1,8 +1,6 @@
 package earthquakemonitoring;
 
 import java.sql.SQLException;
-import java.util.Hashtable;
-import java.util.Iterator;
 
 /**
  * @author Aileen Akpalu and Richard Anatsui

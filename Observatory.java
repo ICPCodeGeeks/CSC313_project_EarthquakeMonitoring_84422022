@@ -1,10 +1,6 @@
 package earthquakemonitoring;
 
 
-import java.util.Hashtable;
-import java.util.Iterator;
-
-
 /**
  *
  * @author Richard Anatsui and Aileen 

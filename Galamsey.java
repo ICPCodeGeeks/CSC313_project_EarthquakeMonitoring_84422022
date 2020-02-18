@@ -1,5 +1,5 @@
 package earthquakemonitoring;
-import java.util.Scanner;
+
 /**
  * 
  * @author Kwabena Koranteng and Richard Anatsui

@@ -1,6 +1,9 @@
 package earthquakemonitoring;
 //package galamseys;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,12 +11,13 @@ import java.io.PrintWriter;
 import java.util.Hashtable;
 import java.util.Scanner;
 
+import static javafx.application.Application.launch;
+
 /**
  *
  * @author Richard Anatsui and Aileen Akpalu
  */
 public class MonitoringIO {
-    private static Hashtable Operations;
     Monitoring mon= new Monitoring();
     Observatory obs =new Observatory();
     Galamsey gam= new Galamsey();
@@ -291,39 +295,43 @@ public class MonitoringIO {
         return -1;
     }
 
-    /**
-     *This is the main method to test all the above methods
-     * @param args
-     * @throws FileNotFoundException
-     */
-    public static void main(String[] args) throws FileNotFoundException {
-        try{
-        Hashtable<Integer, Galamsey> Operations= new Hashtable<>();
-        MonitoringIO monIO= new MonitoringIO();
-        int cont= monIO.Continue();
-        int gen=monIO.GeneralMenu();
-        monIO.writingTextToFiles();
-        monIO.Observatory_File();
-        while(cont==1) {
-            if (gen == 1) {
-                monIO.Observatory_Data();
-
-            } else if (gen == 2) {
-                monIO.Galamsey_Data();
-
-            } else if (gen == 3) {
-                monIO.Statistics();
-            } else {
-                monIO.Exit();
-            }
-            cont=monIO.Continue();
-            }
-        }catch(Exception e){
-            System.out.println(e);
 
 
-        }
 
 
-    }
+//    /**
+//     *This is the main method to test all the above methods
+//     * @param args
+//     * @throws FileNotFoundException
+//     */
+//    public static void main(String[] args) throws FileNotFoundException {
+//        try{
+//        Hashtable<Integer, Galamsey> Operations= new Hashtable<>();
+//        MonitoringIO monIO= new MonitoringIO();
+//        int cont= monIO.Continue();
+//        int gen=monIO.GeneralMenu();
+//        monIO.writingTextToFiles();
+//        monIO.Observatory_File();
+//        while(cont==1) {
+//            if (gen == 1) {
+//                monIO.Observatory_Data();
+//
+//            } else if (gen == 2) {
+//                monIO.Galamsey_Data();
+//
+//            } else if (gen == 3) {
+//                monIO.Statistics();
+//            } else {
+//                monIO.Exit();
+//            }
+//            cont=monIO.Continue();
+//            }
+//        }catch(Exception e){
+//            System.out.println(e);
+//
+//
+//        }
+//
+//
+//    }
 }

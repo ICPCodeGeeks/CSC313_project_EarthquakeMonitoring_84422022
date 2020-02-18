@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F0FFF0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="earthquakemonitoring.GalOb">
+   <children>
+      <AnchorPane layoutY="-2.0" prefHeight="567.0" prefWidth="193.0" style="-fx-background-color: #3D9457;">
+         <children>
+            <Button fx:id="obs_id1" blendMode="DARKEN" layoutX="55.0" layoutY="176.0" mnemonicParsing="false" onAction="#buttonpush" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #006400;" text="ADD">
+               <font>
+                  <Font name="Arial Bold" size="26.0" />
+               </font>
+            </Button>
+            <Text fill="#2700d7" layoutX="47.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ICPCodeGeeks" />
+            <Text fill="#fcfcfc" layoutX="55.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BSEY" wrappingWidth="83.88427734375">
+               <font>
+                  <Font name="Charter Roman" size="33.0" />
+               </font>
+            </Text>
+            <Text layoutX="4.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="O">
+               <font>
+                  <Font name="Charter Roman" size="79.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="14.0" layoutY="176.0" nodeOrientation="RIGHT_TO_LEFT">
+               <image>
+                  <Image url="file:/C:/Users/ADZO/Desktop/Ashesi%20Work/second%20year/second%20sem/Galam_/picture/plus.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="-1.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GALAMSEY" textAlignment="CENTER" wrappingWidth="193.0">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="191.0" layoutY="-4.0" prefHeight="54.0" prefWidth="412.0" style="-fx-background-color: #3D7453;">
+         <children>
+            <Text layoutX="52.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW GALAMSEY DATA">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button blendMode="DARKEN" layoutX="7.0" layoutY="13.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="44.0" />
+            <ImageView fx:id="back_b" fitHeight="25.0" fitWidth="32.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/ADZO/Desktop/Ashesi%20Work/second%20year/second%20sem/Galam_/picture/return.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="210.0" layoutY="84.0" prefHeight="25.0" prefWidth="379.0" text="WHICH OBSERVATORY WILL YOU SELECT?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <MenuButton fx:id="menu_id" layoutX="210.0" layoutY="114.0" mnemonicParsing="false" onAction="#dropdown" prefHeight="44.0" prefWidth="379.0" text="MenuButton" />
+      <Button fx:id="save_id" layoutX="322.0" layoutY="200.0" mnemonicParsing="false" onAction="#buttonpush" prefHeight="49.0" prefWidth="127.0" style="-fx-background-color: #006400;" text="SAVE">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Button>
+      <Label fx:id="l" layoutX="212.0" layoutY="168.0" prefHeight="25.0" prefWidth="379.0" />
+   </children>
+</AnchorPane>
