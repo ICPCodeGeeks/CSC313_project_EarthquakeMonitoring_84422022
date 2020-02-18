@@ -692,6 +692,43 @@ public class Galamseydb {
     		System.out.println(e);
     	}
     	return -1;
+          public int getObservatoryId(String name, int Year) throws SQLException {
+    	try {
+    	String query = "Select * from Observatory where obs_name ='"+name+"' and year_started="+Year;
+    	Statement st=con.createStatement();
+    	ResultSet rs=st.executeQuery(query);
+    	int Galam=0;
+    	while(rs.next()) {
+    		Galam+=rs.getInt(1);
+    		}
+    	return Galam;
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
+    	return -1;
+    }
+    /**
+     * This method returns the id of the most recently added Galamsey record to the galamsey table
+     * @return GID
+     * @throws SQLException
+     */
+    public int getGalamseyyId() throws SQLException {
+    	try {
+    	String query = "Select * from galamsey where GID=(select max(GID) from galamsey)";
+    	Statement st=con.createStatement();
+    	ResultSet rs=st.executeQuery(query);
+    	int Galam=0;
+    	while(rs.next()) {
+    		Galam+=rs.getInt(1);
+    		}
+    	return Galam;
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
+    	return -1;
+    }
     }
    
    
