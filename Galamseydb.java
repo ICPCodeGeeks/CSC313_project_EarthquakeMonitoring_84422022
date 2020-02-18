@@ -401,26 +401,26 @@ public class Galamseydb {
      *This method inserts a single record from the galamsey table
      * @param gam
      */
-    public void addGalamsey(Galamsey gam){
+       public void addGalamsey(Galamsey gam){
         
-        String query = "insert into galamsey values(?,?,?,?,?,?)";
+        String query = "insert into galamsey(veg_col,col_val,latitude,longitude,year_started) values(?,?,?,?,?)";
         PreparedStatement pst;
         try{
             pst= con.prepareStatement(query);
-            pst.setInt(1,gIDCount); //takes number of question mark and value
-            System.out.println(gIDCount);
-            pst.setString(2, gam.getVegetation_color()); //takes number of question mark and value
+          //  pst.setInt(1,gIDCount); //takes number of question mark and value
+           // System.out.println(gIDCount);
+            pst.setString(1, gam.getVegetation_color()); //takes number of question mark and value
             System.out.println(gam.getVegetation_color());
-            pst.setInt(3, gam.getColor_value()); //takes number of question mark and value
+            pst.setInt(2, gam.getColor_value()); //takes number of question mark and value
             System.out.println(gam.getColor_value());
-            pst.setDouble(4, gam.getLatitude()); //takes number of question mark and value
+            pst.setDouble(3, gam.getLatitude()); //takes number of question mark and value
             System.out.println(gam.getLatitude());
-            pst.setDouble(5, gam.getLongitude()); //takes number of question mark and value
+            pst.setDouble(4, gam.getLongitude()); //takes number of question mark and value
             System.out.println(gam.getLongitude());
-            pst.setInt(6, gam.getYear()); //takes number of question mark and value
+            pst.setInt(5, gam.getYear()); //takes number of question mark and value
             System.out.println(gam.getYear());
             int count=pst.executeUpdate();// returns a int of the number of rows affected
-            gIDCount++;
+          //  gIDCount++;
             System.out.println(count+ " row/s affected");
         }catch(Exception e){
             System.out.println(e);
@@ -429,7 +429,6 @@ public class Galamseydb {
         
         
     }
-    
     
     /**
      *This method returns the number of galamsey record
@@ -449,23 +448,24 @@ public class Galamseydb {
      * @param obs
      * @throws SQLException
      */
-    public void addObservatory(Observatory obs) throws SQLException{
-        String query = "insert into observatory values(?,?,?,?,?)";
+      public void addObservatory(Observatory obs) throws SQLException{
+        String query = "insert into observatory(obs_name,country_name,year_started,area_covered) values(?,?,?,?)";
         try{
         PreparedStatement pst= con.prepareStatement(query);
-        pst.setInt(1,oIDCount); //takes number of question mark and value
-        pst.setString(2, obs.getObsName()); //takes number of question mark and value
-        pst.setString(3, obs.getCountryName()); //takes number of question mark and value
-        pst.setInt(4, obs.getYear()); //takes number of question mark and value
-        pst.setDouble(5, obs.getAreaCovered()); //takes number of question mark and value
+       // pst.setInt(1,oIDCount); //takes number of question mark and value
+        pst.setString(1, obs.getObsName()); //takes number of question mark and value
+        pst.setString(2, obs.getCountryName()); //takes number of question mark and value
+        pst.setInt(3, obs.getYear()); //takes number of question mark and value
+        pst.setDouble(4, obs.getAreaCovered()); //takes number of question mark and value
         int count=pst.executeUpdate();// returns a int of the number of rows affected
-        oIDCount++;
+        
         System.out.println(count+ " row/s affected");
         }catch(Exception e){
             System.out.println(e);
         }
         
     }
+   
     /**
      *This method inserts a single record into the galamsey_observatory table
      * @param GID
