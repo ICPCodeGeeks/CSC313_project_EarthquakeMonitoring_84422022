@@ -33,8 +33,6 @@ public class Galamseydb {
         
     }
     Connection con= null;
-    private int gIDCount=1;
-    private int oIDCount=1;
     //Galamsey gam = new Galamsey();
     //Observatory obs= new Observatory();
 
@@ -434,12 +432,17 @@ public class Galamseydb {
     
     
     /**
-     *This method returns the id for a galamsey record
+     *This method returns the number of galamsey record
      * @return int gIDCount
      */
-    public int galamseyIdCount(){
-        return gIDCount;
-    }
+        public int getNumberofGalamsey() throws SQLException{
+    	String query ="Select count(*) from galamsey";
+    	Statement st=con.createStatement();
+    	ResultSet rs=st.executeQuery(query);
+    	
+    	rs.next();
+    	int Count=rs.getInt(1);
+    	return Count;
 
     /**
      *This method inserts a single record into the observatory table
@@ -537,12 +540,20 @@ public class Galamseydb {
     }
 
     /**
-     *This method returns the id for a observatory record
+     *This method returns the number of observatory records
      * @return int oIDCount
      */
-    public int observatoryIdCount(){
-        return oIDCount;
+    public int getNumberOfObservatory() throws SQLException {
+    	 String query = "Select Count(*) from Observatory";
+    	 Statement st=con.createStatement();
+    	 ResultSet rs=st.executeQuery(query);
+    	 
+    	rs.next();
+    	int Count=rs.getInt(1);
+    	return Count;
+    	 
     }
+    
     
     /**
      *This method updates a single record in the galamsey table
