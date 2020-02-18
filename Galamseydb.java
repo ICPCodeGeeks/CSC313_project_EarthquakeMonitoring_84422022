@@ -8,7 +8,7 @@ import java.util.*;
 
 /**
  *
- * @author Richard
+ * @author Richard and Kwabena Koranteng Obeng
  */
 public class Galamseydb {
 
