@@ -77,15 +77,29 @@ public class ListEvent implements Initializable {
                        Integer.parseInt(rs.getString("year_started")) + "\n";
 
            }
-           data.add(galamseyData);
-           i_id.setCellValueFactory(new PropertyValueFactory1<>("GID"));
-           v_id.setCellValueFactory(new PropertyValueFactory1<>("veg_col"));
-           c_id.setCellValueFactory(new PropertyValueFactory1<>("col_val"));
-           l_id.setCellValueFactory(new PropertyValueFactory1<>("latitude"));
-           o_id.setCellValueFactory(new PropertyValueFactory1<>("longitude"));
-           y_id.setCellValueFactory(new PropertyValueFactory1<>("year_started"));
+        
+       public void initialize(URL url, ResourceBundle){
+   
+           p_id.setCellValueFactory(new PropertyValueFactory<TableContent, Integer>("i_id"));
+           m_id.setCellValueFactory(new PropertyValueFactory<TableContent, String>("v_id"));
+           k_id.setCellValueFactory(new PropertyValueFactory<TableContent, String>("c_id"));
+           n_id.setCellValueFactory(new PropertyValueFactory<TableContent, Double>("l_id"));
+           j_id.setCellValueFactory(new PropertyValueFactory<TableContent, Double>("o_id"));
+           u_id.setCellValueFactory(new PropertyValueFactory<TableContent, Integer>("y_id"));
 
-           table_id.setItems(data);
+           table_id.setItems(getContent())
+       }
+     
+     public ObservableList<TableContent> getContent() {
+      ArrayList<string[]> list = g_db.getAllGal1();
+      for(String[] p:list ){
+       data.add(new TableContent( Integer.parseInt(p[0]),p[1],p[2],
+                                 Double.parseDouble(p[3]), Double.ParseDouble(p[4])'
+                                 Integer.parseInt(p[5])));
+      
+      }
+     
+     }
 
 
 
