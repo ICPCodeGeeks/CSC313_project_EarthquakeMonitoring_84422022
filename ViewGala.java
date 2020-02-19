@@ -15,6 +15,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+
+
 public class ViewGala implements Initializable {
     Galamseydb g_db;
     private AnchorPane pane_id;
@@ -92,6 +94,6 @@ public class ViewGala implements Initializable {
         s_two.show();
     }
 
-  
+
 
 }
