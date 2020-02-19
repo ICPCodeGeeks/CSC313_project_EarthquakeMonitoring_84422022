@@ -14,12 +14,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @Author Aileen Akpalu
+ */
 public class AddNew implements Initializable {
     public Button save_id;
     @FXML
+    private TextField color_value;
+    @FXML
     private TextField veg_color;
-    private TextField colour_value;
-     @FXML
+    @FXML
      private TextField pos_lat;
     @FXML
     private TextField pos_long;
@@ -31,14 +35,22 @@ public class AddNew implements Initializable {
    private Label l;
 
 
-
-
-
-
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+
+    /**
+     * This method changes the current screen to Add_nEw.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
     public void buttonpush(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent screen_two= FXMLLoader.load(getClass().getResource("Add_New.fxml"));
         Scene scene = new Scene(screen_two);
@@ -47,6 +59,12 @@ public class AddNew implements Initializable {
         s_two.show();
     }
 
+
+    /**
+     * This method returns to the previous screen Galam_Info.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
     public void back(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent screen_two= FXMLLoader.load(getClass().getResource("Galam_Info.fxml"));
         Scene scene = new Scene(screen_two);
@@ -56,7 +74,11 @@ public class AddNew implements Initializable {
     }
 
 
-
+    /**
+     * This method adds the new data to the database
+     * @param actionEvent
+     * @throws IOException
+     */
     public void buttonsave(ActionEvent actionEvent) throws IOException {
         Parent screen_two= FXMLLoader.load(getClass().getResource("Add_New.fxml"));
         Scene scene = new Scene(screen_two);
@@ -73,8 +95,6 @@ public class AddNew implements Initializable {
         PreparedStatement pst;
         try{
             pst= gd.connect().prepareStatement(query);
-            //  pst.setInt(1,gIDCount); //takes number of question mark and value
-            // System.out.println(gIDCount);
             pst.setString(1, galam.getVegetation_color()); //takes number of question mark and value
             System.out.println(galam.getVegetation_color());
             pst.setInt(2, galam.getColor_value()); //takes number of question mark and value
@@ -86,7 +106,6 @@ public class AddNew implements Initializable {
             pst.setInt(5, galam.getYear()); //takes number of question mark and value
             System.out.println(galam.getYear());
             int count=pst.executeUpdate();// returns a int of the number of rows affected
-            //  gIDCount++;
             System.out.println(count+ " row/s affected");
         }catch(Exception e){
             System.out.println("Error: "+e);
@@ -95,7 +114,4 @@ public class AddNew implements Initializable {
     }
 
 
-    public Galamsey getGalam() {
-        return galam;
-    }
 }
