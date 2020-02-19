@@ -28,8 +28,6 @@ public class ViewGalam implements Initializable {
     private TableColumn v_id;
     private TableColumn c_id;
     private TableColumn l_id;
-    private TableColumn o_id;
-    private TableColumn y_id;
     private Button g_id;
     Galamseydb g_db;
     TableView[] table;
@@ -41,11 +39,19 @@ public class ViewGalam implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            Dropdown();
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
+       i_id.setCellValueFactory(new PropertyValueFactory<TableContent,Integer("id")>);
+       v_id.setCellValueFactory(new PropertyValueFactory<TableContent,Integer("Year")>);
+       c_id.setCellValueFactory(new PropertyValueFactory<TableContent,String("obs_name")>);
+       l_id.setCellValueFactory(new PropertyValueFactory<TableContent,Integer("area_c")>);
+       
+    }
+    
+    public ObservableList<TableContent> getContent(){
+        ArrayList<String[]> list =g_db.getAllObservatory1();
+        for(String[] p: list){
+        data.add(new TableContent(Integer.parseInt(p[0]),p[1],p[2],Double.parseDouble(p[3]),Double.parseDouble(p[4]),Integer.parseInt(5)))
         }
+        return data;
     }
 
     /**
