@@ -11,74 +11,70 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @Author Aileen Akpalu
+ * @version 1.0.1
+ */
 public class GalamInfo implements Initializable {
+
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-    //    public void buttonpush (ActionEvent event) throws IOException {
-//        // Set the Scene to the Stage
-//        Parent screen_two= FXMLLoader.load(getClass().getResource("Add_New_Data.fxml"));
-//        Scene scene = new Scene(screen_two);
-//        Stage s_two=(Stage)((Node)event.getSource()).getScene().getWindow();
-//        s_two.setScene(scene);
-//        // Set the Title to the Stage
-//        s_two.show();
-//
-//    }
-//    public void button (ActionEvent event) throws IOException {
-//        // Set the Scene to the Stage
-//        Parent screen_two= FXMLLoader.load(getClass().getResource("View_galam.fxml"));
-//        Scene scene = new Scene(screen_two);
-//        Stage s_two=(Stage)((Node)event.getSource()).getScene().getWindow();
-//        s_two.setScene(scene);
-//        // Set the Title to the Stage
-//        // Display the Stage
-//        s_two.show();
-//
-//    }
-//    public void buttonstats (ActionEvent event) throws IOException {
-//        // Set the Scene to the Stage
-//        Parent screen_two= FXMLLoader.load(getClass().getResource("Monitoring_Stats.fxml"));
-//        Scene scene = new Scene(screen_two);
-//        Stage s_two=(Stage)((Node)event.getSource()).getScene().getWindow();
-//        s_two.setScene(scene);
-//        // Set the Title to the Stage
-//        s_two.show();
-//
-//    }
+
+    /**
+     * This method sends the current screen to GalamObser.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
     public void back(javafx.event.ActionEvent actionEvent) throws IOException {
-        // Set the Scene to the Stage
         Parent screen_two= FXMLLoader.load(getClass().getResource("GalamObser.fxml"));
         Scene scene = new Scene(screen_two);
         Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         s_two.setScene(scene);
-        // Set the Title to the Stage
         s_two.show();
     }
 
+    /**
+     * This method changes the current screen to Add_new.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
     public void buttonpush(javafx.event.ActionEvent actionEvent) throws IOException {
-        // Set the Scene to the Stage
         Parent screen_two= FXMLLoader.load(getClass().getResource("Add_New.fxml"));
         Scene scene = new Scene(screen_two);
         Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         s_two.setScene(scene);
-        // Set the Title to the Stage
         s_two.show();
     }
 
+    /**
+     * This method changes the current screen to Gala_Stats.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void button(javafx.event.ActionEvent actionEvent) throws IOException {
-        // Set the Scene to the Stage
-        Parent screen_two= FXMLLoader.load(getClass().getResource("Monitoring_Stats.fxml"));
+        Parent screen_two= FXMLLoader.load(getClass().getResource("Gala_Stats.fxml"));
         Scene scene = new Scene(screen_two);
         Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         s_two.setScene(scene);
-        // Set the Title to the Stage
         s_two.show();
     }
 
-    public void buttonsave(javafx.event.ActionEvent actionEvent) throws IOException {  // Set the Scene to the Stage
+
+    /**
+     * This method changes the screen to View_Gala.fxml
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void buttonsave(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent screen_two= FXMLLoader.load(getClass().getResource("View_Gala.fxml"));
         Scene scene = new Scene(screen_two);
         Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -89,4 +85,3 @@ public class GalamInfo implements Initializable {
 
 
 }
-
