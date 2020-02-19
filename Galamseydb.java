@@ -753,7 +753,7 @@ public class Galamseydb {
            // String observatoryData="";//assigns data fetched from database
             while(rs.next()){// shifts pointer to next row and returns true if there
                              //is a next row
-            	list.add(rs);
+            	list.add( rs.getInt(1)+ ":"+ rs.getString(2)+":"+ rs.getString(3)+":"+ rs.getInt(4)+":"+ rs.getDouble(5)+"\n");
               //  observatoryData+= rs.getInt(1)+ ":"+ rs.getString(2)+":"+ rs.getString(3)
               //  +":"+ rs.getInt(4)+":"+ rs.getDouble(5)+"\n";
             }
