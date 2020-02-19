@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ViewGala implements Initializable {
-    TableView[] table;
     Galamseydb g_db;
     private AnchorPane pane_id;
     private TableView table_id;
@@ -33,12 +32,42 @@ public class ViewGala implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            Dropdown();
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
-        }
+      List<Object> list =new ArrayList<>();
+       try{
+           String query= "select * from observatory";
 
+
+           Statement st = g_db.connect().createStatement();
+           st.executeQuery(query);
+           ResultSet rs = st.executeQuery(query);//executes the query
+           // String observatoryData="";//assigns data fetched from database
+           while(rs.next()){// shifts pointer to next row and returns true if there
+               //is a next row
+               list.add( rs.getString("GID")+":"+ rs.getString("veg_col")+":"+rs.getString("col_val")+":"+
+                       Double.parseDouble(rs.getString("latitude"))+":"+Double.parseDouble(rs.getString("longitude"))+":"+
+                       Integer.parseInt(rs.getString("year_started"))+"\n");
+               //  observatoryData+= rs.getInt(1)+ ":"+ rs.getString(2)+":"+ rs.getString(3)
+               //  +":"+ rs.getInt(4)+":"+ rs.getDouble(5)+"\n";
+           }
+           st.close();
+           g_db.connect().close();
+
+           data.add(list);
+           System.out.println(list);
+       }
+
+       catch(Exception e){
+           System.out.println(e);
+       }
+
+       p_id.setCellValueFactory(new PropertyValueFactory1<>("GID"));
+       m_id.setCellValueFactory(new PropertyValueFactory1<>("veg_col"));
+       k_id.setCellValueFactory(new PropertyValueFactory1<>("col_val"));
+       n_id.setCellValueFactory(new PropertyValueFactory1<>("latitude"));
+       j_id.setCellValueFactory(new PropertyValueFactory1<>("longitude"));
+       u_id.setCellValueFactory(new PropertyValueFactory1<>("year_started"));
+
+       tabe_id.setItems(data);
     }
     public void buttonpush(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent screen_two= FXMLLoader.load(getClass().getResource("Add_New_Data.fxml"));
@@ -63,21 +92,6 @@ public class ViewGala implements Initializable {
         s_two.show();
     }
 
-    public void Dropdown() throws IOException, SQLException {
-        int coun= g_db.getNumberofGalamsey();
-        table = new TableView[coun];
-
-        for( int i=0; i < g_db.getNumberofGalamsey(); i++){
-            table[i] = new TableView();
-            String text= g_db.getGalamsey(i++);
-            String[] oWords= text.split(":");
-            i_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	String>(oWords[0]));
-            v_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	String>(oWords[1]));
-            c_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb, Integer>(Integer.parseInt(oWords[2])));
-            l_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	Double>(Double.parseDouble(oWords[3])));
-            o_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	Double>(Double.parseDouble(oWords[4])));
-            y_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb, Integer>(Integer.parseInt(oWords[5])));
-        }
-    }
+  
 
 }
