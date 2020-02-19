@@ -46,38 +46,37 @@ public class ListEvent implements Initializable {
         s_two.show();
     }
     public void que(javafx.event.ActionEvent actionEvent) throws IOException, SQLException {
-        int cal=Integer.parseInt(val_col.getText());
-        table = new TableView[g_db.getNumberofGalamsey()];
-        if(cal==1){
-            g_db.getGalam_Observ(1);
-            Drop();
-        }
-        else if (cal==2){
-            g_db.getGalam_Observ(2);
-            Drop();
-        }
-        else
-            g_db.getGalam_Observ(3);
-        Drop();
-    }
+       try {
+           String query = "select * from galamsey where col_val >" + col_id.getText();
+           Statement st = g_db.connect().createStatement();
+           st.executeQuery(query);
+           ResultSet rs = st.executeQuery(query);//executes the query
+           String galamseyData = "";//assigns data fetched from database
+           while (rs.next()) {// shifts pointer to next row and returns true if there
+               //is a next row
+               galamseyData +=  rs.getString("GID")+":"+ rs.getString("veg_col")+":"+rs.getString("col_val")+":"+
+                       Double.parseDouble(rs.getString("latitude"))+":"+Double.parseDouble(rs.getString("longitude"))+":"+
+                       Integer.parseInt(rs.getString("year_started")) + "\n";
+
+           }
+           data.add(galamseyData);
+           i_id.setCellValueFactory(new PropertyValueFactory1<>("GID"));
+           v_id.setCellValueFactory(new PropertyValueFactory1<>("veg_col"));
+           c_id.setCellValueFactory(new PropertyValueFactory1<>("col_val"));
+           l_id.setCellValueFactory(new PropertyValueFactory1<>("latitude"));
+           o_id.setCellValueFactory(new PropertyValueFactory1<>("longitude"));
+           y_id.setCellValueFactory(new PropertyValueFactory1<>("year_started"));
+
+           table_id.setItems(data);
 
 
-    public void Drop() throws SQLException {
-        int coun= g_db.getNumberofGalamsey();
-        table = new TableView[coun];
-        for( int i=0; i < coun; i++){
-            table[i] = new TableView();
-            String text= g_db.getGalamsey(i++);
-            String[] oWords= text.split(":");
-            i_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	String>(oWords[0]));
-            v_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	String>(oWords[1]));
-            c_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb, Integer>(Integer.parseInt(oWords[2])));
-            l_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	Double>(Double.parseDouble(oWords[3])));
-            o_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb,	Double>(Double.parseDouble(oWords[4])));
-            y_id.setCellValueFactory(	new	PropertyValueFactory1<Galamseydb, Integer>(Integer.parseInt(oWords[5])));
-        }
-    }
 
+       } catch (Exception e) {
+           System.out.println(e);
+       }
+   }
+
+
+
+  
 }
-
-
