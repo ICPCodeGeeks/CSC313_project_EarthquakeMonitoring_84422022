@@ -741,6 +741,32 @@ public class Galamseydb {
     	return -1;
     }
     }
+                public List<Object> getAllObservatory1(){
+    	List<Object> list =new ArrayList<>();
+        try{
+            String query= "select * from observatory";
+
+
+            Statement st = con.createStatement();
+            st.executeQuery(query);
+            ResultSet rs = st.executeQuery(query);//executes the query
+           // String observatoryData="";//assigns data fetched from database
+            while(rs.next()){// shifts pointer to next row and returns true if there
+                             //is a next row
+            	list.add(rs);
+              //  observatoryData+= rs.getInt(1)+ ":"+ rs.getString(2)+":"+ rs.getString(3)
+              //  +":"+ rs.getInt(4)+":"+ rs.getDouble(5)+"\n";
+            }
+            st.close();
+            con.close();
+            
+            return list;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
    
    
 }
