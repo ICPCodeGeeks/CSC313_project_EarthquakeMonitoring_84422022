@@ -36,6 +36,8 @@ To use the program;
 
 * Run the Javafx program
 
+* Run **monitoringIO**
+
 * From the interface, ther are two option(buttons) to be selected from. ***observatory*** and ***galamsey***
 
 * For any of the options selected,there are three actions to choose from ***add***, ***view records***, ***stats*** 
