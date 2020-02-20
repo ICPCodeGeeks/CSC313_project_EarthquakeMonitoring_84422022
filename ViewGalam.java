@@ -98,23 +98,7 @@ public class ViewGalam implements Initializable {
         s_two.setScene(scene);
         s_two.show();
     }
-    /**
-     * This deletes a record from the table
-     * @param actionEvent
-     * @throws SQLException
-     */
-    public void delete(javafx.event.ActionEvent actionEvent) throws SQLException, IOException {
-        ObservableList<TableContent> dat = table_id.getSelectionModel().getSelectedItems();
-        int di= dat.get(0).getID();
-        g_db.deleteGalam_Observ(di);
-        g_db.deleteGalamsey(di);
-        Parent screen_two= FXMLLoader.load(getClass().getResource("View_Galam.fxml"));
-        Scene scene = new Scene(screen_two);
-        Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        s_two.setScene(scene);
-        s_two.show();
-    }
-
+  
     /**
      * This method gets the average of an observatory selected
      * @throws SQLException
@@ -126,5 +110,18 @@ public class ViewGalam implements Initializable {
         g_db.updateObservatory(di,"avg",String.valueOf(avrg));
          table_id.getItems().clear();
          table_id.setItems(getContent());
+    }
+    /**
+     * This deletes a record from thr table
+     * @param actionEvent
+     * @throws SQLException
+     */
+    public void delet(javafx.event.ActionEvent actionEvent) throws SQLException, IOException {
+        ObservableList<TableContent> dat = table_id.getSelectionModel().getSelectedItems();
+        int di= dat.get(0).getGID();
+        g_db.deleteGalam_Observ(di);
+        g_db.deleteGalamsey(di);
+        table_id.getItems().clear();
+        table_id.setItems(getContent());
     }
 }
