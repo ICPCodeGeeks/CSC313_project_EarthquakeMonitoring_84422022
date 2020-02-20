@@ -32,21 +32,11 @@ public class GalaStat implements Initializable {
     }
 
     /**
-     * This method prints the largest color value ever recorded
-     * @throws SQLException
-     */
-    public void Max_Col() throws SQLException {
-        int col= g_db.maxGalamsey();
-        if(col==1){
-            lab_id.setText("GREEN");
-        }
-        else if(col==2) {
-            lab_id.setText("YELLOW");
-        }
-        else
-            lab_id.setText("BROWN");
-
-    }
+    * This method sets the label to the largest color value
+    */
+   public void Purr() throws SQLException {
+            lab_id.setText(String.valueOf(g_db.maxGalamsey()));
+   }
 
     /**
      *This method changes the screen to "Gala_Stat.fxml"
