@@ -1,35 +1,14 @@
 package earthquakemonitoring;
-//package galamseys;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+import java.io.*;
+import java.sql.SQLException;
+import java.util.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Hashtable;
-import java.util.Scanner;
 
-import static javafx.application.Application.launch;
-
-/**
- *
- * @author Richard Anatsui and Aileen Akpalu
- */
 public class MonitoringIO {
-    Monitoring mon= new Monitoring();
-    Observatory obs =new Observatory();
-    Galamsey gam= new Galamsey();
-
-    /**
-     *This method provides a menu for the user to either
-     * enter galamsey data, observatory data or view
-     * monitoring statistics
-     * @return int menu
-     */
-    public int GeneralMenu() {
-        try{
+    static Galamseydb gd=new Galamseydb();
+    static Monitoring m= new Monitoring();
+    public static int GeneralMenu() {
         Scanner menu = new Scanner(System.in);
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("WELCOME  TO THE GALAMSEY INFORMATION CENTER" +
@@ -37,40 +16,36 @@ public class MonitoringIO {
                 "\n 1.Enter Observatory Data" +
                 "\n 2.Enter Galamsey Data" +
                 "\n 3.Monitoring Statistics" +
-                "\n 4. Exit");
+                "\n 4.Details"+
+                "\n 5. Exit");
         int menus = menu.nextInt();
         while (true) {
-            if (menus == 1 || menus == 2 || menus == 3 || menus == 4 ) {
+            if (menus == 1 || menus == 2 || menus == 3 || menus==4) {
                 break;
-            } else {
+            }
+            else if(menus==5){
+                System.out.println("Exiting.......................");
+            } else{
                 System.out.println("Wrong input....................");
                 System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                System.out.println("(\"WELCOME  TO THE GALAMSEY INFORMATION CENTER\" +\n" +
-                        "                \"\\nPlease select an option\" +\n" +
-                        "                \"\\n 1.Enter Observatory Data\" +\n" +
-                        "                \"\\n 2.Enter Galamsey Data\" +\n" +
-                        "                \"\\n 3.Monitoring Statistics\" +\n" +
-                        "                \"\\n 4. Exit");
+                System.out.println("WELCOME  TO THE GALAMSEY INFORMATION CENTER" +
+                        "\nPlease select an option" +
+                        "\n 1.Enter Observatory Data" +
+                        "\n 2.Enter Galamsey Data" +
+                        "\n 3.Monitoring Statistics" +
+                        "\n 4.Details"+
+                        "\n 5. Exit");
                 menus = menu.nextInt();
 
             }
         }
         return menus;
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        return -1;
-
     }
 
 
 
-    /**
-     *This method lets user enter all necessary observatory data
-     * @throws FileNotFoundException
-     */
-    public void Observatory_Data() throws FileNotFoundException {
-        try{
+
+    public static void Observatory_Data()  {
         Observatory new_data = new Observatory();
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("You are entering new observatory data. Please answer the following");
@@ -91,19 +66,19 @@ public class MonitoringIO {
         System.out.println("Year:");
         int year = nam.nextInt();
         new_data.setYear(year);
-        Observatory_Files();
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        gd.addObservatory(new_data);
+
+
+
     }
 
 
+
+
     /**
-     *This method lets user enter all necessary galamsey data
+     *
      */
-    public void Galamsey_Data(){
-        try{
+    public static void Galamsey_Data() {
         Galamsey new_data = new Galamsey();
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("You are entering new 'galamsey' data. Please answer the following");
@@ -125,149 +100,86 @@ public class MonitoringIO {
         double pos_long= nam.nextDouble();
         new_data.setLatitude(pos_long);
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");System.out.println("Year:");
-        System.out.println(" ");
-        System.out.println("Year: ");
         int year = nam.nextInt();
         new_data.setYear(year);
-        new_data= new Galamsey(veg_color,color_value,year,pos_lat,pos_long);
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        try {
-            writingTextToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-       // Operations.put(color_value,new_data);
+        gd.addGalamsey(new_data);
 
     }
 
-    /**
-     * This method prints the  largest average “galamsey”, largest “galamsey” ever
-     * and all “galamsey” with colour value greater than a given number
-     */
-    public void Statistics() {
-        try{
+
+    public static void Statistics() throws SQLException {
         Scanner menu = new Scanner(System.in);
         System.out.println(" Enter a colour value from 0-3: ");
         int number= menu.nextInt();
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("These are the current Monitoring Statistics"+
-                "\n Largest colour value:"+ mon.largests()+
-                "\n Average colour value: "+ mon.average());
-        System.out.println( "\n Galamsey Events: ");
-                mon.Galamsey_List(number);
-        }catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-    /**
-     *This method writes the headings for the observatory data to a text file
-     * @throws FileNotFoundException
-     */
-    public void Observatory_File() throws FileNotFoundException {
-
-        PrintWriter printWriter = null;
-
-        try {
-            //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("observatory_data.txt", true));
-        } catch (FileNotFoundException fnfe) {
-            fnfe.getMessage();
-        }
-
-//prints the headings to the text file
-        printWriter.print("Observatory Name" + "    " + "Country Name" + "    " + " Year"+"    " +" Area Covered");
-        printWriter.println();
-
-        printWriter.close();
+                "\n Largest colour value:"+ m.largests());
+        System.out.println("\n Average colour value: "+ m.average());
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println( "\n Galamsey Events: "+"\n"+ m.Galamsey_List(number));
 
     }
 
-    /**
-     *This method writes the observatory data to a text file
-     * @throws FileNotFoundException
-     */
-    public void Observatory_Files() throws FileNotFoundException {
+public static int Details(){
+    Scanner menu = new Scanner(System.in);
+    System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+    System.out.println("DETAILS" +
+            "\nPlease select an option" +
+            "\n 1.All Observatory Details" +
+            "\n 2.All Galamsey Details" +
+            "\n 3.Single Observatory Detail" +
+            "\n 4. Single Galamsey Detail"
+            );
+    int menus = menu.nextInt();
+    while (true) {
+        if (menus == 1 || menus == 2 || menus == 3||menus==4 ) {
+            break;
 
-        PrintWriter printWriter = null;
+        } else{
+            System.out.println("Wrong input....................");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("DETAILS" +
+                    "\nPlease select an option" +
+                    "\n 1.All Observatory Details" +
+                    "\n 2.All Galamsey Details" +
+                    "\n 3.Single Observatory Detail" +
+                    "\n 4. Single Galamsey Detail");
+            menus = menu.nextInt();
 
-        try {
-            //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("observatory_data.txt", true));
-        } catch (FileNotFoundException fnfe) {
-            fnfe.getMessage();
         }
+    }
+    return menus;
+}
 
-//prints the headings to the text file
-        printWriter.print(obs.getObsName() + "    " + obs.getCountryName() + "    " + obs.getYear()+"    " +obs.getAreaCovered());
-        printWriter.println();
+public static void All_ObsDet(){
+        Scanner re= new Scanner(System.in);
+        System.out.println("Enter the ID of an Observatory: ");
+        int rd= re.nextInt();
+        gd.getGalamsey(rd);
+}
 
-        printWriter.close();
-
+    public static void All_GalDet(){
+        Scanner re= new Scanner(System.in);
+        System.out.println("Enter the ID of an Galamsey event: ");
+        int rd= re.nextInt();
+        gd.getObservatory(rd);
     }
 
-    /**
-     *This method writes the headings for the galamsey data to a text file
-     * @throws FileNotFoundException
-     */
-    public void writingTextToFiles() throws FileNotFoundException {
-
-        PrintWriter printWriter = null;
-
-        try {
-            //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("galamsey_data.txt", true));
-        } catch (FileNotFoundException fnfe) {
-            fnfe.getMessage();
-        }
-
-//prints the headings to the text file
-        printWriter.print("Vegetation Color" + "    " + "Color Value" + "    " + " Position Latitude"+"    " +" Position Longitude"+ "    "+" Year");
-        printWriter.println();
-
-        printWriter.close();
-
+    public static void All_dets(){
+        gd.getAllObservatory1();
+    }
+    public static void All_gal(){
+        gd.getAllGal1();
     }
 
-    /**
-     *This method writes the observatory data to a text file
-     * @throws FileNotFoundException
-     */
-    public void writingTextToFile() throws FileNotFoundException {
 
-        PrintWriter printWriter = null;
 
-        try {
-            //Note that we are able to append to the file because of the "true" parameter
-            printWriter = new PrintWriter(new FileOutputStream("galamsey_data.txt", true));
-        } catch (FileNotFoundException fnfe) {
-            fnfe.getMessage();
-        }
-
-//prints the headings to the text file
-        printWriter.print(gam.getVegetation_color() + "    " + gam.getColor_value() + "    " + gam.getPosition()+"    "+gam.getYear());
-        printWriter.println();
-
-        printWriter.close();
-
-    }
-
-    /**
-     *This method prints "Exiting" in the console
-     */
-    public void Exit(){
+    public static void Exit(){
         System.out.println("Exiting...........................................................");
     }
 
-    /**
-     * This method finds out from the user whether he wants to continue or not
-     * and returns an int based on their input
-     * @return int cons
-     */
-    public int Continue() {
-        try{
+
+    public static int Continue() {
         Scanner con = new Scanner(System.in);
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Do you want to Continue?" +
@@ -289,47 +201,45 @@ public class MonitoringIO {
             }
         }
         return cons;
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        return -1;
     }
 
 
+    public static void main(String[] args) throws SQLException {
 
 
+        int cont= Continue();
+        while(cont==1) {
+            int gen=GeneralMenu();
+            if (gen == 1) {
+                Observatory_Data();
 
-//    /**
-//     *This is the main method to test all the above methods
-//     * @param args
-//     * @throws FileNotFoundException
-//     */
-//    public static void main(String[] args) throws FileNotFoundException {
-//        try{
-//        MonitoringIO monIO= new MonitoringIO();
-//        int cont= monIO.Continue();
-//        int gen=monIO.GeneralMenu();
-//        monIO.writingTextToFiles();
-//        monIO.Observatory_File();
-//        while(cont==1) {
-//            if (gen == 1) {
-//                monIO.Observatory_Data();
-//
-//            } else if (gen == 2) {
-//                monIO.Galamsey_Data();
-//
-//            } else if (gen == 3) {
-//                monIO.Statistics();
-//            } else {
-//                monIO.Exit();
-//            }
-//            cont=monIO.Continue();
-//            }
-//        }catch(Exception e){
-//            System.out.println(e);
-//
-//        }
-//
-//
-//    }
+            } else if (gen == 2) {
+                Galamsey_Data();
+
+            } else if (gen == 3) {
+                Statistics();
+            } else if(gen== 4) {
+                int d= Details();
+                if(d==1){
+                    All_dets();
+                }
+                else if(d==2){
+                    All_gal();
+                }
+                else if(d==3){
+                    All_ObsDet();
+                }
+                else{
+                    All_GalDet();
+                }
+            }
+            else{
+                Exit();
+            }
+            cont=Continue();
+
+
+        }
+
+    }
 }
