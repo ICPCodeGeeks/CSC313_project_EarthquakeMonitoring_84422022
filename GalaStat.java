@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 /**
  *
  * @author Richard and Aileen
+ *@version 1.0.2
  */
 public class GalaStat implements Initializable {
     private Label lab_id;
