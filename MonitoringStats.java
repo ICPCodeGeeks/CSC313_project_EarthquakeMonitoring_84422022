@@ -66,29 +66,9 @@ public class MonitoringStats implements Initializable {
     }
 
     /**
-     *
+     * This method returns the observatory name with the largest average value
      */
-    public void PageLoad(){
-            String max=g_db.maxAvgObserv();
-            col_val.setText(max);
-        System.out.println(col_val);
-
-    }
-
-    /**
-     *This method prints the largest color value ever recorded
-     * @throws SQLException
-     */
-    public void Max_Col() throws SQLException {
-        int col= g_db.maxGalamsey();
-        if(col==1){
-            avg_val.setText("Green");
-        }
-        else if(col==2) {
-            avg_val.setText("Yellow");
-        }
-        else
-            avg_val.setText("Brown");
-
+    public void But_P() {
+        col_val.setText(g_db.maxAvgObserv());
     }
 }
