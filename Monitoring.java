@@ -13,15 +13,15 @@ public class Monitoring {
     public Monitoring(){
 
 }
-    Observatory o= new Observatory();
+
     Galamseydb g1= new Galamseydb();
-    Galamsey gam= new Galamsey();
+
     /**
      * This method returns the largest "galamsey" colour value.
      * @return large
      */
     public int largests() throws SQLException{
-        
+
         return g1.maxGalamsey();
     }
 
@@ -38,13 +38,12 @@ public class Monitoring {
     /**
      * This method returns the list of all "galamsey" events with a colour value greater than
      * a given number n.
-     * @param Galamsey_Operations
-     * @param n
+     * @param col_val
      */
     public String Galamsey_List(int col_val){
         try{
             return g1.getAllGalamsey(col_val);
-        
+
         }catch(Exception e){
             System.out.println(e);
         }
