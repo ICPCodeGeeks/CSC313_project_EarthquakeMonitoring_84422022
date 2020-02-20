@@ -113,6 +113,23 @@ public class ViewGala implements Initializable {
         s_two.setScene(scene);
         s_two.show();
     }
+    /**
+     * This deletes a record from thr table
+     * @param actionEvent
+     * @throws SQLException
+     */
+    public void delete(javafx.event.ActionEvent actionEvent) throws SQLException, IOException {
+        ObservableList<TableContent> dat = tabe_id.getSelectionModel().getSelectedItems();
+        int di= dat.get(0).getID();
+        g_db.deleteGalam_Observ(di);
+        g_db.deleteGalamsey(di);
+        Parent screen_two= FXMLLoader.load(getClass().getResource("View_Gala.fxml"));
+        Scene scene = new Scene(screen_two);
+        Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        s_two.setScene(scene);
+        s_two.show();
+    }
+
 
 
 
