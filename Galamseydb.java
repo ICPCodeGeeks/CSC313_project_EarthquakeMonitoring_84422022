@@ -13,32 +13,11 @@ import java.util.*;
  */
 public class Galamseydb {
 
-    /**
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-
-        Galamseydb gdb = new Galamseydb();
-        Scanner scan = new Scanner(System.in);
-        Galamsey g1 = new Galamsey("Yellow", 2, 2018, 15.23456, -30.67890);
-//        System.out.println(gdb.maxAvgObserv());
-//        System.out.println(gdb.getAllObservatory());
-//        System.out.println(gdb.getAllGalamsey());
-//        System.out.println(gdb.observatoryIdCount());
-//        System.out.println(gdb.getNumberOfObservatory());
-        System.out.println(gdb.maxAvgObserv());
-        System.out.println(gdb.maxGalamsey());
-
-
-    }
 
 
     Connection con;
     Statement st;
     ResultSet rs;
-    private int gIDCount = 1;
-    private int oIDCount = 1;
 
 
     /**
@@ -510,15 +489,7 @@ public class Galamseydb {
 
     }
 
-    /**
-     * This method returns the id for a observatory record
-     *
-     * @return int oIDCount
-     */
-    public int observatoryIdCount() {
-        return oIDCount;
-    }
-
+    
     /**
      * This method updates a single record in the galamsey table
      *
