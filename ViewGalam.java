@@ -21,7 +21,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+/**
+ * @Author Aileen Akpalu, Kwabena Koranteng
+ * @@version 1.0.3
+ */
 public class ViewGalam implements Initializable {
 
     @FXML
