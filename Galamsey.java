@@ -1,8 +1,9 @@
 package earthquakemonitoring;
 
 /**
- * 
+ *
  * @author Kwabena Koranteng and Richard Anatsui
+ *@version 1.0.4
  *
  */
 
@@ -40,12 +41,12 @@ public class Galamsey {
 
 		}
 	}
-		
+
     /**
      *default constructor
      */
     public Galamsey() {
-        
+
     }
 
     /**
@@ -139,7 +140,7 @@ public void setYear(int year) {
 	}
 
 	/**
-	 * This returns the latitude 
+	 * This returns the latitude
 	 * @return latitude
 	 */
 	public double getLatitude() {
@@ -162,7 +163,7 @@ public void setYear(int year) {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+
 
 	/**
 	 *This method returns the position
@@ -182,22 +183,20 @@ public String GalamseyDetails() {
 						"The position is " + getPosition() +" \n" +
 						 "The year in which it happened is " + getYear() + "\n";
 	return GalamseyDets;
-						
+
 			}
 
 
-	
-	
-	
-	
-	
-	
 
 
 
 
-	
+
+
+
+
+
+
+
 
 }
-
-
