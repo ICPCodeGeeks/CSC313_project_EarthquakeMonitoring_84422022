@@ -14,7 +14,11 @@ import java.io.IOException;
  * @version 1.0.5
  */
 public class MonitoringGUI extends Application {
-
+    /**
+     * This sets the screen to Galam_Obser
+     * @param primaryStage
+     * @throws Exception
+     */
         @Override
         public void start(Stage primaryStage) throws Exception{
             Parent root = FXMLLoader.load(getClass().getResource("GalamObser.fxml"));
@@ -24,6 +28,11 @@ public class MonitoringGUI extends Application {
             primaryStage.show();
         }
 
+    /**
+     * This sets the screen Observatory_Data
+     * @param actionEvent
+     * @throws IOException
+     */
         public void buttonpush(javafx.event.ActionEvent actionEvent) throws IOException {
             // Set the Scene to the Stage
             Parent screen_two= FXMLLoader.load(getClass().getResource("Observatory_Data.fxml"));
@@ -34,6 +43,11 @@ public class MonitoringGUI extends Application {
             s_two.show();
         }
 
+    /**
+     * This sets the screen Galam_info
+     * @param actionEvent
+     * @throws IOException
+     */
         public void button(javafx.event.ActionEvent actionEvent) throws IOException {
             Parent screen_two= FXMLLoader.load(getClass().getResource("Galam_Info.fxml"));
             Scene scene = new Scene(screen_two);
@@ -42,13 +56,11 @@ public class MonitoringGUI extends Application {
             s_two.show();
         }
 
-
+    /**
+     * Main method
+     * @param args
+     */
         public static void main(String[] args) {
             launch(args);
         }
     }
-
-
-
-
-
