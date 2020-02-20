@@ -98,7 +98,7 @@ public class ViewGalam implements Initializable {
         s_two.setScene(scene);
         s_two.show();
     }
-  
+
     /**
      * This method gets the average of an observatory selected
      * @throws SQLException
@@ -118,7 +118,7 @@ public class ViewGalam implements Initializable {
      */
     public void delet(javafx.event.ActionEvent actionEvent) throws SQLException, IOException {
         ObservableList<TableContent> dat = table_id.getSelectionModel().getSelectedItems();
-        int di= dat.get(0).getGID();
+        int di= dat.get(0).getId();
         g_db.deleteGalam_Observ(di);
         g_db.deleteGalamsey(di);
         table_id.getItems().clear();
