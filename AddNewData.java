@@ -131,16 +131,16 @@ public class AddNewData implements Initializable {
      * @throws SQLException
      */
     public void buttonsave(ActionEvent actionEvent) throws IOException, SQLException {
-        o_db.getObsName();
-        o_db.getCountryName();
-        o_db.getAreaCovered();
-        o_db.getYear();
-        g_db.addObservatory(o_db);
         Parent screen_two= FXMLLoader.load(getClass().getResource("Add_New_Data.fxml"));
         Scene scene = new Scene(screen_two);
         Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         s_two.setScene(scene);
         s_two.show();
+        o_db.getObsName();
+        o_db.getCountryName();
+        o_db.getAreaCovered();
+        o_db.getYear();
+        g_db.addObservatory(o_db);
 
 
     }
