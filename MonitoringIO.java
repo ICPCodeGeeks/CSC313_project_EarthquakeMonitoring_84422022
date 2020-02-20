@@ -4,10 +4,19 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
-
+/**
+ * @author Aileen Akpalu
+ * @Kobby Koranteng
+ * @Kelvin Akakpa
+ */
 public class MonitoringIO {
     static Galamseydb gd=new Galamseydb();
     static Monitoring m= new Monitoring();
+
+    /**
+     * This method prints a menu that gives a user options to choose from
+     * @return
+     */
     public static int GeneralMenu() {
         Scanner menu = new Scanner(System.in);
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -43,8 +52,9 @@ public class MonitoringIO {
     }
 
 
-
-
+    /**
+     * This methods aks for a user to input neew observatory data
+     */
     public static void Observatory_Data()  {
         Observatory new_data = new Observatory();
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -76,7 +86,7 @@ public class MonitoringIO {
 
 
     /**
-     *
+     *This method asks for a user to input new data
      */
     public static void Galamsey_Data() {
         Galamsey new_data = new Galamsey();
@@ -106,7 +116,10 @@ public class MonitoringIO {
 
     }
 
-
+    /**
+     * This method prints the current statistics of observatory
+     * @throws SQLException
+     */
     public static void Statistics() throws SQLException {
         Scanner menu = new Scanner(System.in);
         System.out.println(" Enter a colour value from 0-3: ");
@@ -120,7 +133,11 @@ public class MonitoringIO {
 
     }
 
-public static int Details(){
+    /**
+     * This method returns a menu that allows for an input
+     * @return
+     */
+    public static int Details(){
     Scanner menu = new Scanner(System.in);
     System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     System.out.println("DETAILS" +
@@ -151,13 +168,19 @@ public static int Details(){
     return menus;
 }
 
-public static void All_ObsDet(){
+    /**
+     * This method prints a single observatory record
+     */
+    public static void All_ObsDet(){
         Scanner re= new Scanner(System.in);
         System.out.println("Enter the ID of an Observatory: ");
         int rd= re.nextInt();
         gd.getGalamsey(rd);
 }
 
+    /**
+     * This method prints the record of one galamsey event
+     */
     public static void All_GalDet(){
         Scanner re= new Scanner(System.in);
         System.out.println("Enter the ID of an Galamsey event: ");
@@ -165,20 +188,32 @@ public static void All_ObsDet(){
         gd.getObservatory(rd);
     }
 
+    /**
+     * This prints all the observatory records
+     */
     public static void All_dets(){
         gd.getAllObservatory1();
     }
+
+    /**
+     * This method prints all galamsey records
+     */
     public static void All_gal(){
         gd.getAllGal1();
     }
 
 
-
+    /**
+     * This method ends the program
+     */
     public static void Exit(){
         System.out.println("Exiting...........................................................");
     }
 
-
+    /**
+     * This asks for an input and goes back to the Main menu if 1 and exits if 2
+     * @return
+     */
     public static int Continue() {
         Scanner con = new Scanner(System.in);
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -203,7 +238,11 @@ public static void All_ObsDet(){
         return cons;
     }
 
-
+    /**
+     * This is the main method that runs
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
 
 
