@@ -107,33 +107,6 @@ public class GalaList implements Initializable {
      * @param event
      */
     public void que(javafx.event.ActionEvent event){
-        try {
-            String query = "select * from galamsey where col_val >" + ol_id.getText();
-            Statement st = g_db.connect().createStatement();
-            st.executeQuery(query);
-            ResultSet rs = st.executeQuery(query);//executes the query
-            String galamseyData = "";//assigns data fetched from database
-            while (rs.next()) {// shifts pointer to next row and returns true if there
-                //is a next row
-                galamseyData +=  rs.getString("GID")+":"+ rs.getString("veg_col")+":"+rs.getString("col_val")+":"+
-                        Double.parseDouble(rs.getString("latitude"))+":"+Double.parseDouble(rs.getString("longitude"))+":"+
-                        Integer.parseInt(rs.getString("year_started")) + "\n";
-
-            }
-            data.add(galamseyData);
-            ia_id.setCellValueFactory(new PropertyValueFactory1<>("GID"));
-            ve_id.setCellValueFactory(new PropertyValueFactory1<>("veg_col"));
-            cv_id.setCellValueFactory(new PropertyValueFactory1<>("col_val"));
-            la_id.setCellValueFactory(new PropertyValueFactory1<>("latitude"));
-            lo_id.setCellValueFactory(new PropertyValueFactory1<>("longitude"));
-            ye_id.setCellValueFactory(new PropertyValueFactory1<>("year_started"));
-
-            tabl_id.setItems(data);
-
-
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+      data.add(g_db.greaterGalamsey(Integer.parseInt(ol_id.getText())));
     }
 }
