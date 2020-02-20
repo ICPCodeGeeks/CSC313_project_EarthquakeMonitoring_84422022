@@ -1,7 +1,8 @@
 package earthquakemonitoring;
 /**
  *
- * @author Richard Anatsui
+ * @author Richard Anatsui and Kobby Koranteng and Aileen Akpalu
+ *@version 1.0.5
  */
 import java.sql.*;
 import java.util.*;
