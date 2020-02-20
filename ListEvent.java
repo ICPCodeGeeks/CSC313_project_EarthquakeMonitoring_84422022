@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 /**
  *
  * @author Richard and Aileen
+ *@version 1.0.3
  */
 public class ListEvent implements Initializable {
  private TextField nam_o;
