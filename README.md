@@ -26,7 +26,7 @@ To create the program, we used;
 
 * Scenebuilder
 
-* Any IDE that supports Java (intelliJ preferably)
+* Any IDE that supports Java (intelliJ preferably) with java version 11
 
 * MySQL
 
