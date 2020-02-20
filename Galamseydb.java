@@ -488,8 +488,26 @@ public class Galamseydb {
         }
 
     }
+    /**
+     * This method deletes records from the galamsey_observatory table
+     *
+     * @param id
+     * @throws SQLException
+     */
+    public void deleteGala_Observ(int id) throws SQLException {
+        try {
+            String query = "delete from galamsey_observatory where OID=" + id;
+            PreparedStatement pst = con.prepareStatement(query);
+            int count = pst.executeUpdate();// returns a int of the number of rows affected
+            System.out.println(count + " row/s affected");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-    
+    }
+
+
+
     /**
      * This method updates a single record in the galamsey table
      *
