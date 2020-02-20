@@ -123,6 +123,8 @@ public class ViewGalam implements Initializable {
         ObservableList<TableContent> dat = table_id.getSelectionModel().getSelectedItems();
         int di= dat.get(0).getID();
         double avrg = g_db.getAvgObserv(di);
-        avg_id.setText(String.valueOf(avrg));
+        g_db.updateObservatory(di,"avg",String.valueOf(avrg));
+         table_id.getItems().clear();
+         table_id.setItems(getContent());
     }
 }
