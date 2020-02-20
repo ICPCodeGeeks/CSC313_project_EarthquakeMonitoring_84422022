@@ -46,6 +46,8 @@ To use the program;
 
 * ***in the  **view records** action, the is an option to query the database***
 
+* ***in the view records** action for the observatory, the table is clickable and the average column can be updated by clicking on the update button***
+
 
 **Creators**
 
