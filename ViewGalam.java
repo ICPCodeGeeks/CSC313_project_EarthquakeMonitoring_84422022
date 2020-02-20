@@ -119,7 +119,7 @@ public class ViewGalam implements Initializable {
     public void delet(javafx.event.ActionEvent actionEvent) throws SQLException, IOException {
         ObservableList<TableContent> dat = table_id.getSelectionModel().getSelectedItems();
         int di= dat.get(0).getId();
-        g_db.deleteGalam_Observ(di);
+        g_db.deleteGala_Observ(di);
         g_db.deleteGalamsey(di);
         table_id.getItems().clear();
         table_id.setItems(getContent());
