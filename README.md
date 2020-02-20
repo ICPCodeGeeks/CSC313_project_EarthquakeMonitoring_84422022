@@ -12,10 +12,10 @@
 
 **Description**
 
-This program is an international monitoring system that records where “galamsey” occur and how devastating 
-they are in Africa. The program stores and retrieves information about the vegetation 
-colour, colour value, position (latitude and longitude) and year of the event and also stores and retrieves 
-the name of the observatory, the name of the country in which it is located, the year in which “galamsey” observations started, 
+This program is an international monitoring system that records where “galamsey” occur and how devastating
+they are in Africa. The program stores and retrieves information about the vegetation
+colour, colour value, position (latitude and longitude) and year of the event and also stores and retrieves
+the name of the observatory, the name of the country in which it is located, the year in which “galamsey” observations started,
 the area covered by the observatory (in square kilometers) and a list of “galamsey” events that it has recorded
 
 **Installation**
@@ -36,11 +36,11 @@ To use the program;
 
 * Run the Javafx program
 
-* Run **monitoringIO**
+* Run **monitoringIO.java**
 
 * From the interface, ther are two option(buttons) to be selected from. ***observatory*** and ***galamsey***
 
-* For any of the options selected,there are three actions to choose from ***add***, ***view records***, ***stats*** 
+* For any of the options selected,there are three actions to choose from ***add***, ***view records***, ***stats***
 
 * ***add*** is to add a new record, ***view records*** is to view existing records and ***stats*** is to view general statistics.
 
