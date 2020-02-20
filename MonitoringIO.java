@@ -24,7 +24,7 @@ public class MonitoringIO {
 
     /**
      *This method provides a menu for the user to either
-     * enter galamsey data, observatory data or view 
+     * enter galamsey data, observatory data or view
      * monitoring statistics
      * @return int menu
      */
@@ -60,10 +60,10 @@ public class MonitoringIO {
             System.out.println(e);
         }
         return -1;
-        
+
     }
 
-    
+
 
     /**
      *This method lets user enter all necessary observatory data
@@ -143,7 +143,7 @@ public class MonitoringIO {
     }
 
     /**
-     * This method prints the  largest average “galamsey”, largest “galamsey” ever 
+     * This method prints the  largest average “galamsey”, largest “galamsey” ever
      * and all “galamsey” with colour value greater than a given number
      */
     public void Statistics() {
@@ -306,7 +306,6 @@ public class MonitoringIO {
 //     */
 //    public static void main(String[] args) throws FileNotFoundException {
 //        try{
-//        Hashtable<Integer, Galamsey> Operations= new Hashtable<>();
 //        MonitoringIO monIO= new MonitoringIO();
 //        int cont= monIO.Continue();
 //        int gen=monIO.GeneralMenu();
@@ -328,7 +327,6 @@ public class MonitoringIO {
 //            }
 //        }catch(Exception e){
 //            System.out.println(e);
-//
 //
 //        }
 //
