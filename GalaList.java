@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 /**
  *
  * @author Richard and Aileen
+ *@version 1.0.3
  */
 public class GalaList implements Initializable {
     @FXML
