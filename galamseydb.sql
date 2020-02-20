@@ -1,3 +1,4 @@
+
 create schema galamseydb;
 use galamseydb;
 
@@ -10,7 +11,7 @@ longitude double(10,8) not null,
 year_started mediumint(4) not null,
 primary key(GID)
 );
-drop table galamsey;
+
 
 create table observatory(
 OID bigint auto_increment primary key,
@@ -20,28 +21,43 @@ year_started mediumint(4) not null,
 area_covered float(6,2) unsigned
 );
 create table galamsey_observatory(
+	OID bigint,
 	GID bigint,
-    OID bigint,
-	primary key(GID, OID),
-    foreign key(GID) references galamsey(GID),
-    foreign key(OID) references observatory(OID)
+	primary key(OID, GID),
+    foreign key(OID) references observatory(OID),
+    foreign key(GID) references galamsey(GID)
+
 );
-drop table observatory;
 
-insert into galamsey values(6,"Yellow",2,16.12345,-35.67890,2016),
-(7,"Yellow",2,23.54321,-35.09876,2013),(8,"Yellow",2,18.34521,45.12390,2007),
-(9,"Yellow",2,50.62345,12.65490,2019);
 
-insert into observatory values(1,"X35","Nigeria",2012,30.52),
-(2,"X35","Ghana",2006,54.76),(3,"X35","Niger",2015,12.97),
-(4,"X35","Liberia",2008,23.94);
+insert into galamsey values(1,"Brown",3,16.12345,-35.67890,2016),
+(2,"Yellow",2,23.54321,-35.09876,2013),(3,"Green",1,18.34521,45.12390,2007),
+(4,"Yellow",2,50.62345,12.65490,2019);
 
-insert into galamsey_observatory values(3,1),(4,1),(2,2),(6,1),(4,2),(1,4),(9,1),(7,1);
-
-select avg(col_val) from galamsey;
-select max(( 
-select count(col_val) from galamsey where col_val=1)and
-(select count(col_val) from galamsey where col_val=2) and
-(select count(col_val) from galamsey where col_val=3)) as 'Max color value' from galamsey;
-delete from galamsey where GID = 9;
-select max(count(col_val)) from galamsey;
+insert into observatory values(1,"Kante","Nigeria",2012,30.52),
+(2,"Rolo","Ghana",2006,54.76),(3,"Cholo","Niger",2015,12.97),
+(4,"Sanga","Liberia",2008,23.94);
+insert into galamsey_observatory values(1,1),(1,2),(2,3),(1,4),(2,2),(4,3);
+insert into galamsey_observatory(OID,GID) values(1,11);
+insert into galamsey values(4,"Yellow",2,50.62345,12.65490,2019);
+insert into galamsey_observatory values(1,4);
+SELECT
+    galamsey.GID,
+    galamsey.veg_col,
+    galamsey.col_val,
+    galamsey.latitude,
+    galamsey.longitude,
+    galamsey.latitude,
+    galamsey.year_started
+FROM
+   observatory
+INNER JOIN
+    galamsey_observatory USING (OID)
+INNER JOIN
+    galamsey USING (GID)
+WHERE
+	galamsey.col_val> 1 and
+    observatory.obs_name='Kante'
+ORDER BY
+    galamsey_observatory.OID,
+    observatory.obs_name;
