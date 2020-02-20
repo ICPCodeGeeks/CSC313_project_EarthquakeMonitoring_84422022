@@ -25,7 +25,6 @@ public class ListEvent implements Initializable {
  private TextField val_col;
  private Button query;
  private TableView table_id;
- private TableView[] table;
     Galamseydb g_db;
     private TableColumn i_id;
     private TableColumn v_id;
@@ -33,7 +32,7 @@ public class ListEvent implements Initializable {
     private TableColumn l_id;
     private TableColumn o_id;
     private TableColumn y_id;
-
+private final ObservableList<Object> data = FXCollections.observableArrayList();
     /**
      *
      * @param url
@@ -41,7 +40,14 @@ public class ListEvent implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+      p_id.setCellValueFactory(new PropertyValueFactory<TableContent, Integer>("i_id"));
+      m_id.setCellValueFactory(new PropertyValueFactory<TableContent, String>("v_id"));
+      k_id.setCellValueFactory(new PropertyValueFactory<TableContent, String>("c_id"));
+      n_id.setCellValueFactory(new PropertyValueFactory<TableContent, Double>("l_id"));
+      j_id.setCellValueFactory(new PropertyValueFactory<TableContent, Double>("o_id"));
+      u_id.setCellValueFactory(new PropertyValueFactory<TableContent, Integer>("y_id"));
 
+      table_id.setItems(getContent())
     }
 
     /**
@@ -64,51 +70,23 @@ public class ListEvent implements Initializable {
      * @throws SQLException
      */
     public void que(javafx.event.ActionEvent actionEvent) throws IOException, SQLException {
-       try {
-           String query = "select * from galamsey where col_val >" + col_id.getText();
-           Statement st = g_db.connect().createStatement();
-           st.executeQuery(query);
-           ResultSet rs = st.executeQuery(query);//executes the query
-           String galamseyData = "";//assigns data fetched from database
-           while (rs.next()) {// shifts pointer to next row and returns true if there
-               //is a next row
-               galamseyData +=  rs.getString("GID")+":"+ rs.getString("veg_col")+":"+rs.getString("col_val")+":"+
-                       Double.parseDouble(rs.getString("latitude"))+":"+Double.parseDouble(rs.getString("longitude"))+":"+
-                       Integer.parseInt(rs.getString("year_started")) + "\n";
+      data.add((g_db.greaterGalamsey(Integer.parseInt(col_id.getText()))));
 
            }
-        
-       public void initialize(URL url, ResourceBundle){
-   
-           p_id.setCellValueFactory(new PropertyValueFactory<TableContent, Integer>("i_id"));
-           m_id.setCellValueFactory(new PropertyValueFactory<TableContent, String>("v_id"));
-           k_id.setCellValueFactory(new PropertyValueFactory<TableContent, String>("c_id"));
-           n_id.setCellValueFactory(new PropertyValueFactory<TableContent, Double>("l_id"));
-           j_id.setCellValueFactory(new PropertyValueFactory<TableContent, Double>("o_id"));
-           u_id.setCellValueFactory(new PropertyValueFactory<TableContent, Integer>("y_id"));
 
-           table_id.setItems(getContent())
-       }
-     
+
+
      public ObservableList<TableContent> getContent() {
       ArrayList<string[]> list = g_db.getAllGal1();
       for(String[] p:list ){
        data.add(new TableContent( Integer.parseInt(p[0]),p[1],p[2],
-                                 Double.parseDouble(p[3]), Double.ParseDouble(p[4])'
+                                 Double.parseDouble(p[3]), Double.ParseDouble(p[4]),
                                  Integer.parseInt(p[5])));
-      
-      }
-     
-     }
+
+    }
+  }
 
 
 
-       } catch (Exception e) {
-           System.out.println(e);
-       }
-   }
 
-
-
-  
 }
