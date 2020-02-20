@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 /**
  *
  * @author Richard and Aileen
+ *@version 1.0.2
  */
 public class AddNewData implements Initializable {
 
