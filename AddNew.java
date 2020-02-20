@@ -79,8 +79,8 @@ public class AddNew implements Initializable {
      * @param actionEvent
      * @throws IOException
      */
-    public void buttonsave(ActionEvent actionEvent) throws IOException {
-        Parent screen_two= FXMLLoader.load(getClass().getResource("Add_New.fxml"));
+     public void buttonsave(ActionEvent actionEvent) throws IOException {
+        Parent screen_two= FXMLLoader.load(getClass().getResource("Gal_Ob.fxml"));
         Scene scene = new Scene(screen_two);
         Stage s_two=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         s_two.setScene(scene);
@@ -91,27 +91,6 @@ public class AddNew implements Initializable {
         galam.setLongitude(Double.parseDouble(pos_long.getText()));
         galam.setYear(Integer.parseInt(year.getText()));
         gd.addGalamsey(galam);
-        String query = "insert into galamsey(veg_col,col_val,latitude,longitude,year_started) values(?,?,?,?,?)";
-        PreparedStatement pst;
-        try{
-            pst= gd.connect().prepareStatement(query);
-            pst.setString(1, galam.getVegetation_color()); //takes number of question mark and value
-            System.out.println(galam.getVegetation_color());
-            pst.setInt(2, galam.getColor_value()); //takes number of question mark and value
-            System.out.println(galam.getColor_value());
-            pst.setDouble(3, galam.getLatitude()); //takes number of question mark and value
-            System.out.println(galam.getLatitude());
-            pst.setDouble(4, galam.getLongitude()); //takes number of question mark and value
-            System.out.println(galam.getLongitude());
-            pst.setInt(5, galam.getYear()); //takes number of question mark and value
-            System.out.println(galam.getYear());
-            int count=pst.executeUpdate();// returns a int of the number of rows affected
-            System.out.println(count+ " row/s affected");
-        }catch(Exception e){
-            System.out.println("Error: "+e);
-        }
-
     }
-
 
 }
